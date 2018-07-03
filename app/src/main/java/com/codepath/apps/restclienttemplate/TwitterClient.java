@@ -8,9 +8,6 @@ import com.github.scribejava.core.builder.api.BaseApi;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import static com.github.scribejava.core.model.OAuthConstants.CONSUMER_KEY;
-import static com.github.scribejava.core.model.OAuthConstants.CONSUMER_SECRET;
-
 /*
  * 
  * This is the object responsible for communicating with a REST API. 
@@ -24,10 +21,8 @@ import static com.github.scribejava.core.model.OAuthConstants.CONSUMER_SECRET;
  * 
  */
 public class TwitterClient extends OAuthBaseClient {
-	public static final BaseApi REST_API_INSTANCE = TwitterApi.instance(); // Change this
-	public static final String REST_URL = "https://api.twitter.com/1.1"; // Change this, base API URL
-	public static final String REST_CONSUMER_KEY = CONSUMER_KEY;       // Change this
-	public static final String REST_CONSUMER_SECRET = CONSUMER_SECRET; // Change this
+	public static final BaseApi REST_API_INSTANCE = TwitterApi.instance();
+	public static final String REST_URL = "https://api.twitter.com/1.1";
 
 	// Landing page to indicate the OAuth flow worked in case Chrome for Android 25+ blocks navigation back to the app.
 	public static final String FALLBACK_URL = "https://codepath.github.io/android-rest-client-template/success.html";
@@ -38,8 +33,8 @@ public class TwitterClient extends OAuthBaseClient {
 	public TwitterClient(Context context) {
 		super(context, REST_API_INSTANCE,
 				REST_URL,
-				REST_CONSUMER_KEY,
-				REST_CONSUMER_SECRET,
+				context.getString(R.string.CONSUMER_KEY_API),
+				context.getString(R.string.CONSUMER_KEY_SECRET),
 				String.format(REST_CALLBACK_URL_TEMPLATE, context.getString(R.string.intent_host),
 						context.getString(R.string.intent_scheme), context.getPackageName(), FALLBACK_URL));
 	}
