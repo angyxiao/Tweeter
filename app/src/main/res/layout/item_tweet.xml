@@ -14,19 +14,37 @@
 
     <TextView
         android:id="@+id/tvUsername"
-        android:layout_width="329dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="5dp"
+        android:layout_marginStart="-32dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/tvBody"
-        android:layout_width="329dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/tvUsername"
+        android:layout_marginTop="38dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvHandle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="5dp"
-        android:layout_toEndOf="@+id/ivProfileImage"
+        android:layout_toEndOf="@+id/tvUsername"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvBody"
+        android:layout_below="@+id/tvUsername"
         android:text="TextView" />
 </RelativeLayout>
