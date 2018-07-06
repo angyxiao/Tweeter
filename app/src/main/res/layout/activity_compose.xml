@@ -30,7 +30,7 @@
         android:layout_below="@+id/editTweet"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-5dp"
-        android:onClick="onPublish"
+        android:onClick="publishTweet"
         android:text="Publish" />
 
 </RelativeLayout>
