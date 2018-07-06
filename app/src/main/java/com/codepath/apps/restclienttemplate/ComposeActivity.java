@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -32,6 +33,9 @@ public class ComposeActivity extends AppCompatActivity {
 
     // publishes the entered text as a tweet
     public void publishTweet(View view) {
+        // on some click or some loading we need to wait for...
+        ProgressBar pb = (ProgressBar) findViewById(R.id.pbLoading);
+        pb.setVisibility(ProgressBar.VISIBLE);
         final EditText tweet = (EditText) findViewById(R.id.editTweet);
         client.sendTweet(tweet.getText().toString(), new JsonHttpResponseHandler() {
             @Override
@@ -71,5 +75,6 @@ public class ComposeActivity extends AppCompatActivity {
                 throwable.printStackTrace();
             }
         });
+        pb.setVisibility(ProgressBar.INVISIBLE);
     }
 }

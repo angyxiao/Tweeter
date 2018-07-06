@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.codepath.apps.restclienttemplate.models.SampleModel;
 import com.codepath.apps.restclienttemplate.models.SampleModelDao;
@@ -44,9 +45,13 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 	// i.e Display application "homepage"
 	@Override
 	public void onLoginSuccess() {
+		// on some click or some loading we need to wait for...
+		ProgressBar pb = (ProgressBar) findViewById(R.id.pbLoading);
+		pb.setVisibility(ProgressBar.VISIBLE);
 		// Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
 		Intent i = new Intent(this, TimelineActivity.class);
 		startActivity(i);
+		pb.setVisibility(ProgressBar.INVISIBLE);
 	}
 
 	// OAuth authentication flow failed, handle the error
