@@ -4,32 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:backgroundTint="#c0deed"
     tools:context=".ComposeActivity">
 
-    <EditText
-        android:id="@+id/editTweet"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:ellipsize="start"
-        android:ems="10"
-        android:gravity="start"
-        android:hint="Enter tweet here..."
-        android:inputType="textMultiLine"
-        tools:layout_editor_absoluteX="6dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="140">
+
+        <EditText
+            android:id="@+id/editTweet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:ellipsize="start"
+            android:ems="10"
+            android:gravity="start"
+            android:hint="Enter tweet here..."
+            android:inputType="textMultiLine"
+            tools:layout_editor_absoluteX="6dp"
+            tools:layout_editor_absoluteY="16dp" />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/publishButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTweet"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-5dp"
+        android:layout_marginBottom="10dp"
         android:onClick="publishTweet"
         android:text="Publish" />
 
