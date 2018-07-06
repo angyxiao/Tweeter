@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -26,32 +28,24 @@ public class ComposeActivity extends AppCompatActivity {
 
     // publishes the entered text as a tweet
     public void publishTweet(View view) {
-        EditText tweet = (EditText) findViewById(R.id.editTweet);
+        final EditText tweet = (EditText) findViewById(R.id.editTweet);
         client.sendTweet(tweet.getText().toString(), new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                // Return the tweet message back to timeline
-                EditText tweet = (EditText) findViewById(R.id.editTweet);
-                // Prepare data intent
-                Intent data = new Intent();
-                // Pass relevant data back as a result
-                data.putExtra("tweet", tweet.getText().toString());
-                data.putExtra("code", 200); // ints work too
-                // Activity finished ok, return the data
-                setResult(RESULT_OK, data); // set result code and bundle data for response
-                finish(); // closes the activity, pass data to parent
-            }
-            @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                // Return the tweet message back to timeline
-                EditText tweet = (EditText) findViewById(R.id.editTweet);
-                // Prepare data intent
-                Intent data = new Intent();
-                // Pass relevant data back as a result
-                data.putExtra("tweet", tweet.getText().toString());
-                data.putExtra("code", 200); // ints work too
-                // Activity finished ok, return the data
-                setResult(RESULT_OK, data); // set result code and bundle data for response
+                try {
+                    Tweet tweet = Tweet.fromJSON(response);
+                    // Return the tweet message back to timeline
+                    EditText message = (EditText) findViewById(R.id.editTweet);
+                    // Prepare data intent
+                    Intent data = new Intent();
+                    // Pass relevant data back as a result
+                    data.putExtra("tweet", tweet);
+                    data.putExtra("code", 200); // ints work too
+                    // Activity finished ok, return the data
+                    setResult(RESULT_OK, data); // set result code and bundle data for response
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 finish(); // closes the activity, pass data to parent
             }
 

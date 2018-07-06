@@ -136,9 +136,13 @@ public class TimelineActivity extends AppCompatActivity {
         // REQUEST_CODE is defined above
         if (resultCode == RESULT_OK && requestCode == COMPOSE_REQUEST) {
             // Extract name value from result extras
-            String name = data.getExtras().getString("tweet");
+            Tweet tweet = (Tweet) data.getSerializableExtra("tweet");
             int code = data.getExtras().getInt("code", 0);
-            // Toast the name to display temporarily on screen
+            // Insert the new tweet into the tweets array list and notify the adapter
+            tweets.add(0, tweet);
+            tweetAdapter.notifyItemInserted(0);
+            rvTweets.scrollToPosition(0);
+            // Toast a success message to display temporarily on screen
             Toast.makeText(this, "Tweet sent", Toast.LENGTH_LONG).show();
         }
     }
