@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.apps.restclienttemplate.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
@@ -32,7 +33,7 @@ public class ComposeActivity extends AppCompatActivity {
 
 
     // publishes the entered text as a tweet
-    public void publishTweet(View view) {
+    public void publishTweet(final View view) {
         // on some click or some loading we need to wait for...
         ProgressBar pb = (ProgressBar) findViewById(R.id.pbLoading);
         pb.setVisibility(ProgressBar.VISIBLE);
@@ -43,10 +44,10 @@ public class ComposeActivity extends AppCompatActivity {
                 try {
                     Tweet tweet = Tweet.fromJSON(response);
                     // Return the tweet message back to timeline
-                    EditText message = (EditText) findViewById(R.id.editTweet);
                     // Prepare data intent
                     Intent data = new Intent();
                     // Pass relevant data back as a result
+                    tweet.in_reply_to_status_id = (User) view.getTag();
                     data.putExtra("tweet", tweet);
                     data.putExtra("code", 200); // ints work too
                     // Activity finished ok, return the data

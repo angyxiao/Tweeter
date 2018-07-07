@@ -12,6 +12,7 @@ public class Tweet implements Serializable{
     public long uid; // database ID for the tweet
     public User user;
     public String createdAt;
+    public User in_reply_to_status_id;
 
     // deserialize the JSON
     public static Tweet fromJSON(JSONObject jsonObject) throws JSONException {

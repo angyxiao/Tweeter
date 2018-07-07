@@ -20,6 +20,7 @@ import java.util.Locale;
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> {
 
     private List<Tweet> mTweets;
+    private static Tweet tweet;
     Context context;
     // pass in the Tweets array in the constructor
     public TweetAdapter(List<Tweet> tweets) {
@@ -41,7 +42,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // get the data according to position
-        Tweet tweet = mTweets.get(position);
+        tweet = mTweets.get(position);
 
         // populate the views according to this data
         holder.tvHandle.setText(tweet.user.screenName);
@@ -69,6 +70,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvHandle = itemView.findViewById(R.id.tvHandle);
             tvBody = itemView.findViewById(R.id.tvBody);
             tvTime = itemView.findViewById(R.id.tvTime);
+
+            itemView.setTag(132532542, tweet);
         }
     }
 

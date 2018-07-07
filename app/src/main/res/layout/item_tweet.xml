@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tweet"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp">
@@ -55,6 +56,7 @@
         android:layout_height="32dp"
         android:layout_alignStart="@+id/tvUsername"
         android:layout_below="@+id/tvBody"
+        android:onClick="replyTweet"
         app:srcCompat="@mipmap/ic_launcher_foreground" />
 
     <ImageButton
@@ -63,6 +65,7 @@
         android:layout_height="32dp"
         android:layout_below="@+id/tvBody"
         android:layout_toEndOf="@+id/bretweet"
+        android:onClick="favoriteTweet"
         app:srcCompat="@drawable/ic_favorite" />
 
     <ImageButton
@@ -71,6 +74,7 @@
         android:layout_height="32dp"
         android:layout_below="@+id/tvBody"
         android:layout_toEndOf="@+id/breply"
+        android:onClick="retweetTweet"
         app:srcCompat="@drawable/ic_retweet" />
 
 </RelativeLayout>

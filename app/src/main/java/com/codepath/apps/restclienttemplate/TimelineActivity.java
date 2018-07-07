@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -26,12 +28,13 @@ public class TimelineActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeContainer;
 
     public static final int COMPOSE_REQUEST = 1;
-    public static final int PROFILE_REQUEST = 2;
+    public static final int REPLY_REQUEST = 2;
 
     private TwitterClient client;
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
+    Tweet repliedToTweet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,16 +163,9 @@ public class TimelineActivity extends AppCompatActivity {
             case R.id.miCompose:
                 composeMessage();
                 return true;
-            case R.id.miProfile:
-                showProfileView();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void showProfileView() {
-
     }
 
     private void composeMessage() {
@@ -190,6 +186,35 @@ public class TimelineActivity extends AppCompatActivity {
             rvTweets.scrollToPosition(0);
             // Toast a success message to display temporarily on screen
             Toast.makeText(this, "Tweet sent", Toast.LENGTH_LONG).show();
+        } else if (resultCode == RESULT_OK && requestCode == REPLY_REQUEST) {
+            // Extract name value from result extras
+            Tweet tweet = (Tweet) data.getSerializableExtra("tweet");
+            int code = data.getExtras().getInt("code", 0);
+            EditText message = (EditText) findViewById(R.id.editTweet);
+            tweet.in_reply_to_status_id = repliedToTweet.user;
+            String tweetMessage = "@" + tweet.in_reply_to_status_id.screenName + message.getText().toString();
+            tweet.body = tweetMessage;
+            // Insert the new tweet into the tweets array list and notify the adapter
+            tweets.add(0, tweet);
+            tweetAdapter.notifyItemInserted(0);
+            rvTweets.scrollToPosition(0);
+            // Toast a success message to display temporarily on screen
+            Toast.makeText(this, "Tweet sent", Toast.LENGTH_LONG).show();
         }
     }
+
+    public void replyTweet(View view) {
+        repliedToTweet = (Tweet) view.getTag();
+        Intent i = new Intent(this, ComposeActivity.class);
+        startActivityForResult(i, REPLY_REQUEST);
+    }
+
+    public void favoriteTweet(View view) {
+
+    }
+
+    public void retweetTweet(View view) {
+
+    }
+
 }
