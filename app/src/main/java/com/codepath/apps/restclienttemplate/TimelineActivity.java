@@ -79,7 +79,7 @@ public class TimelineActivity extends AppCompatActivity {
         populateTimeline();
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher_foreground);
+        getSupportActionBar().setLogo(R.mipmap.ic_foreground);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
     }
 
